@@ -21,17 +21,31 @@ const INITIAL_STUFFS = [
 export default function App() {
   const [stuffs, setStuffs] = React.useState(INITIAL_STUFFS);
 
+  const handleAddStuff = (newStuff) => {
+    setStuffs([...stuffs, newStuff]);
+  };
+
+  const handleRemoveStuff = (index) => {
+    setStuffs(stuffs.filter((_, i) => i !== index));
+  };
+
   return (
     <>
       <header>
         <h1>My Stuff</h1>
       </header>
 
-      <StuffForm></StuffForm>
+      <StuffForm onAddStuff={handleAddStuff}></StuffForm>
 
       <div className="stuff-list">
         {stuffs.map((stuff, index) => (
-          <StuffCard key={index} name={stuff.name} price={stuff.price} />
+          <StuffCard
+            key={index}
+            index={index}
+            name={stuff.name}
+            price={stuff.price}
+            onRemove={handleRemoveStuff}
+          />
         ))}
       </div>
     </>
