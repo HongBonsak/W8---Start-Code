@@ -25,7 +25,7 @@ export default function App() {
   const [orders, setOrders] = React.useState(ORDERS);
 
   const updateQuantity = (index, newQuantity) => {
-    if (newQuantity > 0) {
+    if (newQuantity >= 0) {
       const updatedOrders = [...orders];
       updatedOrders[index].quantity = newQuantity;
       setOrders(updatedOrders);
